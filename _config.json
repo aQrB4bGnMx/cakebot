@@ -1,0 +1,6 @@
+{
+    "readme": "rename to config.json",
+    "email": "cakebot@example.com",
+    "pass": "ExAmPlE",
+    "autorun": true
+}
