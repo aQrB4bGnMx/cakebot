@@ -1,5 +1,6 @@
-var config = require('./config.json');
+global.config = require('./config.json');
 var Discord = require("discord.js");
+global.version = "v0.1.1";
 
 var cake = new Discord.Client();
 
@@ -20,6 +21,8 @@ cake.on("ready", function(){
     });
 
     require("./modules/cakeinfo")(cake);
-    require("./modules/soundboard")(cake);
+    if(config.voip.enabled === true) {
+        require("./modules/soundboard")(cake);
+    }
 
 });

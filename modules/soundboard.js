@@ -2,7 +2,7 @@ var path = require("path");
 var fs = require("fs");
 
 module.exports = function(cake) {
-    var server = cake.servers.get("id", 133648084671528961); // 124563698642714625 == PIG
+    var server = cake.servers.get("id", config.voip.server);
     var channel = server.channels[1]; //static because cache didn't work
 
     var files = fs.readdirSync(path.join(__dirname, "sound"));
@@ -23,8 +23,10 @@ module.exports = function(cake) {
                     }
                     cake.sendMessage(message.channel, "Available sounds: \n" + response);
                 } else {
+                    //:voip play
                     if(cmd[1] == "play") {
                         if(cmd[2] !== undefined) {
+                            //check whether the file exists
                             fs.stat(path.join(__dirname, "sound", cmd[2] + ".wav"), function(err, stats) {
                                 if(err) {
                                     cake.reply(message, "Could not access that file :(");
