@@ -27,10 +27,9 @@ module.exports = function(cake) {
             }, 1000);
         }
 
-        if(message.content === ":cake source"){
+        if(message.content === ":cake source")
             cake.sendMessage(message.channel, "You wanna see my source code? If you know what I mean \n" +
                                               "https://github.com/Nickforall/cakebot");
-        }
 
         if(message.content === ":cake info server") {
             var server = message.channel.server;
