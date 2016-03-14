@@ -22,7 +22,9 @@ module.exports = function(cake) {
         if(message.content === ":cake kill" && message.author.id == config.owner) {
             cake.sendMessage(message.channel, "You just keep on trying \n'til you run out of cake.\n" +
                                               "And the science gets done\nFor the people who are still alive.");
-            process.exit(0);
+            setTimeout(function(){
+                process.exit(0);
+            }, 1000);
         }
 
         if(message.content === ":cake source"){
