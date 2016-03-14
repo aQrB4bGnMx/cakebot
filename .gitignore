@@ -33,7 +33,9 @@ node_modules
 .node_repl_history
 
 # Cakebot specific
-config.json
+/config.json
+/modules/soundboard
+# ^ WIP
 
 # Discord.io
 tenc

@@ -1,0 +1,24 @@
+{
+  "name": "cakebot",
+  "version": "0.1.0",
+  "description": "The cake is a lie, seriously",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^6.1.0",
+    "socket.io": "^1.4.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nickforall/cakebot.git"
+  },
+  "author": "Nickforall",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Nickforall/cakebot/issues"
+  },
+  "homepage": "https://github.com/Nickforall/cakebot#readme"
+}

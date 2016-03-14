@@ -1,19 +1,25 @@
-var DiscordClient = require('discord.io');
 var config = require('./config.json');
-var events;
+var Discord = require("discord.js");
 
-var bot = new DiscordClient({
-    autorun: config.autorun,
-    email: config.email,
-    password: config.pass
+var cake = new Discord.Client();
+
+cake.loginWithToken(config.token, config.email, config.pass, function(error, token) {
+    if(error) {
+        console.log("[AUTH] Failed");
+        console.log(error.stack);
+        return;
+    }
+
+    console.log("[AUTH] Logged in!");
+    console.log("[AUTH] Token: " + token);
 });
 
+cake.on("ready", function(){
+    cake.setStatus("here", "owned by @nickforall", function(err){
+        if(err) console.log(err.stack);
+    });
 
-
-bot.on('ready', function() {
-    console.log(bot.username + " - (" + bot.id + ")");
-});
-
-bot.on('message', function(user, userID, channelID, message, rawEvent) {
+    require("./modules/cakeinfo")(cake);
+    require("./modules/soundboard")(cake);
 
 });
