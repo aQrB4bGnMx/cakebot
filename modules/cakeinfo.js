@@ -19,8 +19,16 @@ module.exports = function(cake) {
             message.author.discriminator + "\nRoles: " + rolesString + "```");
         }
 
-        if(message.content === ":cake kill" && message.author.id == config.owner)
-            process.exit(1);
+        if(message.content === ":cake kill" && message.author.id == config.owner) {
+            cake.sendMessage(message.channel, "You just keep on trying \n'til you run out of cake.\n" +
+                                              "And the science gets done\nFor the people who are still alive.");
+            process.exit(0);
+        }
+
+        if(message.content === ":cake source"){
+            cake.sendMessage(message.channel, "You wanna see my source code? If you know what I mean \n" +
+                                              "https://github.com/Nickforall/cakebot");
+        }
 
         if(message.content === ":cake info server") {
             var server = message.channel.server;
