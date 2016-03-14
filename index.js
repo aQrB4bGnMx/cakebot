@@ -1,6 +1,6 @@
 global.config = require('./config.json');
 var Discord = require("discord.js");
-global.version = "v0.1.1";
+global.version = "v0.1.2";
 
 var cake = new Discord.Client();
 
@@ -16,7 +16,8 @@ cake.loginWithToken(config.token, config.email, config.pass, function(error, tok
 });
 
 cake.on("ready", function(){
-    cake.setStatus("here", "owned by @nickforall", function(err){
+
+    cake.setStatus("here", version + " by nickforall", function(err){
         if(err) console.log(err.stack);
     });
 
