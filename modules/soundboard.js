@@ -27,12 +27,13 @@ module.exports = function(cake) {
                     if(cmd[1] == "play") {
                         if(cmd[2] !== undefined) {
                             //check whether the file exists
-                            fs.stat(path.join(__dirname, "sound", cmd[2] + ".wav"), function(err, stats) {
+                            var rick = cmd[2] === "rickroll";
+                            fs.stat(path.join(__dirname, "sound", cmd[2] + rick ? ".mp3" : ".wav"), function(err, stats) {
                                 if(err) {
                                     cake.reply(message, "Could not access that file :(");
                                     return;
                                 } else {
-                                    conn.playFile(path.join(__dirname, "sound", cmd[2] + ".wav"), function(err){
+                                    conn.playFile(path.join(__dirname, "sound", cmd[2] + rick ? ".mp3" : ".wav"), function(err){
                                         console.log("[VOIP] " + message.author.name + " played " + cmd[2]);
                                     });
                                 }
