@@ -21,7 +21,7 @@ module.exports = function(cake) {
                     for (i = 0; i < files.length; i++) {
                         response += "(" + i + ") " + files[i] + "\n";
                     }
-                    cake.sendMessage(message.channel, "Available sounds: \n" + response);
+                    cake.sendMessage(message.author, "Available sounds: \n" + response);
                 } else {
                     //:voip play
                     if(cmd[1] == "play") {
