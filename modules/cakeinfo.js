@@ -33,6 +33,22 @@ module.exports = function(cake) {
 
         if(message.content === ":cake info server") {
             var server = message.channel.server;
+            var str = serializeServerChannels(server);
+
+            cake.sendMessage(message.channel, "```" + server.id + ": \n\n" + str + "```");
+        }
+
+        if(message.content === ":cake dev servers") {
+            var servers = cake.servers;
+
+            for (i = 0; i < servers.length; i++) {
+                var s = servers[i];
+                cake.sendMessage(message.author, "```#" + s.id + " > " + s.name + "\n\n" + serializeServerChannels(s) + "```");
+            }
+
+        }
+
+        function serializeServerChannels(server) {
             var chanString = "";
 
             for (i = 0; i < server.channels.length; i++) {
@@ -40,7 +56,7 @@ module.exports = function(cake) {
                 chanString += c.type + "#" + c.id + " > " + c.name + "\n";
             }
 
-            cake.sendMessage(message.channel, "```" + server.id + ": \n\n" + chanString + "```");
+            return chanString;
         }
 
     });
