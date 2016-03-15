@@ -21,7 +21,7 @@ module.exports = function(cake) {
                 var js = message.content.replace(":js ", "");
                 console.log("[JSVM] " + message.author.name + "@" + message.channel.id + " executed javascript: " + js);
                 try {
-                    var result = vm.runInNewContext(js, sandbox);
+                    var result = vm.runInNewContext(js, sandbox, {timeout: 10000});
                     cake.sendMessage(message.channel, "```-> " + result + "```");
                 } catch(err) {
                     //if execution failed, send stack in pm

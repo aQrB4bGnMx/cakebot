@@ -39,13 +39,14 @@ module.exports = function(cake) {
         }
 
         if(message.content === ":cake dev servers") {
-            var servers = cake.servers;
+            var out = "";
 
-            for (i = 0; i < servers.length; i++) {
-                var s = servers[i];
-                cake.sendMessage(message.author, "```#" + s.id + " > " + s.name + "\n\n" + serializeServerChannels(s) + "```");
-            }
+            message.client.servers.forEach(function(element) {
+                var s = element;
+                out += "```#" + s.id + " > " + s.name + "\n\n" + serializeServerChannels(s) + "```\n";
+            });
 
+            cake.sendMessage(message.author, out);
         }
 
         function serializeServerChannels(server) {
