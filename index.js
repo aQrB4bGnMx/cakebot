@@ -4,7 +4,7 @@ global.version = "v0.3.0";
 
 var cake = new Discord.Client();
 
-cake.loginWithToken(config.token, config.email, config.pass, function(error, token) {
+cake.login(config.email, config.pass, function(error, token) {
     if(error) {
         console.log("[AUTH] Failed");
         console.log(error.stack);
@@ -16,5 +16,9 @@ cake.loginWithToken(config.token, config.email, config.pass, function(error, tok
 });
 
 cake.on("ready", function(){
+    require("./modules/privateAI")(cake);
+    require("./modules/twitch")(cake);
+    require("./modules/cake")(cake);
 
+    cake.setStatus("here", version + " by nickforall");
 });

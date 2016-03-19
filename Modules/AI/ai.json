@@ -1,0 +1,6 @@
+{
+    "greetings": {
+        "normal": ["hey", "hello", "greetings", "hi", "hai", "whats up"],
+        "normalresponses": ["Hey, %username%", "Hello, %username%", "Hai ^_^"]
+    }
+}
