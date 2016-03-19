@@ -16,9 +16,9 @@ cake.login(config.email, config.pass, function(error, token) {
 });
 
 cake.on("ready", function(){
-    require("./modules/privateAI")(cake);
-    require("./modules/twitch")(cake);
-    require("./modules/cake")(cake);
+    require("./Modules/privateAI")(cake);
+    require("./Modules/twitch")(cake);
+    require("./Modules/cake")(cake);
 
     cake.setStatus("here", version + " by nickforall");
 });

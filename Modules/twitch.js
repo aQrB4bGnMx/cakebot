@@ -57,9 +57,7 @@ module.exports = function(cake) {
         }
     }
 
-    testLive();
-
-    //setInterval(testLive, 20000);
+    setInterval(testLive, 20000);
 
     return {};
 };
