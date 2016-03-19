@@ -46,7 +46,7 @@ module.exports = function(cake) {
         dataobj.live = true;
         try {
             jsonfile.writeFileSync(datafile, dataobj);
-            cake.sendMessage(chan, "Sinq is now live: https://www.twitch.tv/sinqnew \n Title: " + body.status);
+            cake.sendMessage(chan, "Sinq is now live: https://www.twitch.tv/sinqnew \n Title: " + body.stream.status);
         } catch(err) {
             console.log(err.stack);
         }
