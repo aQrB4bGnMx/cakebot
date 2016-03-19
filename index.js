@@ -1,6 +1,6 @@
 global.config = require('./config.json');
 var Discord = require("discord.js");
-global.version = "v0.2.3";
+global.version = "v0.3.0";
 
 var cake = new Discord.Client();
 
@@ -16,15 +16,5 @@ cake.loginWithToken(config.token, config.email, config.pass, function(error, tok
 });
 
 cake.on("ready", function(){
-
-    cake.setStatus("here", version + " by nickforall", function(err){
-        if(err) console.log(err.stack);
-    });
-
-    require("./modules/cakeinfo")(cake);
-    if(config.voip.enabled === true) {
-        require("./modules/soundboard")(cake);
-    }
-    require("./modules/vm")(cake);
 
 });
