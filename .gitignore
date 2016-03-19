@@ -39,3 +39,6 @@ node_modules
 
 # Discord.io
 tenc
+
+# Modules
+/modules/twitch/data.json

@@ -49,13 +49,17 @@ module.exports = function(cake) {
         dataobj.live = true;
         try {
             jsonfile.writeFileSync(datafile, dataobj);
-            cake.sendMessage(chan, "Sinq is now live: https://www.twitch.tv/sinqnew \n Title: " + body.stream.status);
+            console.log(body);
+            cake.sendMessage(chan, "Sinq is now live: https://www.twitch.tv/sinqnew ! \nPlaying: " +
+                                    body.stream.game + "\nTitle: " + body.stream.channel.status);
         } catch(err) {
             console.log(err.stack);
         }
     }
 
-    setInterval(testLive, 20000);
+    testLive();
+
+    //setInterval(testLive, 20000);
 
     return {};
 };
