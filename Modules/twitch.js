@@ -25,7 +25,10 @@ module.exports = function(cake) {
             if (!error && response.statusCode === 200) {
                 processBody(body);
             } else {
-                console.log(error.stack);
+                if(error) {
+                    console.log(error.stack);
+                    return;
+                }
                 console.log("STATUS: " +  response.statusCode);
             }
         });
