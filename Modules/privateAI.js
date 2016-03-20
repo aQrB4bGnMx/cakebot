@@ -23,16 +23,36 @@ module.exports = function(cake) {
         return arr[Math.floor(Math.random() * arr.length)];
     }
 
+    function inArray(needle, haystck) {
+        var array = [];
+
+        haystck.forEach(function(element){
+            array.push(element.toLowerCase());
+        });
+
+        return array.indexOf(needle) > -1;
+    }
+
     cake.on("message", function(message){
         var parsable = cleanString(message.content);
 
         //do not respond in channels
         if(!message.channel.isPrivate) return;
-        console.log(parsable);
 
-        if(staticdata.greetings.normal.indexOf(parsable) > -1) {
+        //greetings
+        if(inArray(parsable, staticdata.greetings.normal)) {
             cake.sendMessage(message.author,
                 prepareResponse(staticdata.greetings.normalresponses, message));
+        }
+
+        if(inArray(parsable, staticdata.greetings.howareyou)) {
+            cake.sendMessage(message.author,
+                prepareResponse(staticdata.greetings.howareyouresponses, message));
+        }
+
+        if(inArray(parsable, staticdata.questions.help)) {
+            cake.sendMessage(message.author,
+                prepareResponse(staticdata.questions.helpresponses, message));
         }
     });
 

@@ -1,6 +1,12 @@
 {
     "greetings": {
         "normal": ["hey", "hello", "greetings", "hi", "hai", "whats up"],
-        "normalresponses": ["Hey, %username%", "Hello, %username%", "Hai ^_^"]
+        "normalresponses": ["Hey, %username%", "Hello, %username%", "Hai ^_^"],
+        "howareyou": ["how are you", "hows life", "sup", "how you doing", "whats up", "what is up"],
+        "howareyouresponses": ["If I had feelings, I think I would be doing quite well!"]
+    },
+    "questions": {
+        "help": ["help", "can you help me", "can you help", "help us"],
+        "helpresponses": ["Well, that's what I am made for", "I can try, at least...", "Cakebot to the rescue!", "What can I help you with, %username%", "Sure, what can I help you with?"]
     }
 }
