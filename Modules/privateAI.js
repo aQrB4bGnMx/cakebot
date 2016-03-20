@@ -1,15 +1,23 @@
 var staticdata = require("./AI/ai.json");
 
 module.exports = function(cake) {
+
+    /* statics variable */
+    var statics = [];
+
+    /* Helper functions */
     function cleanString(inp) {
+        //only keep a-z and spaces, and make all lowercase
         return inp.toLowerCase().replace(/[^a-zA-Z ]/g, "");
     }
 
+    //parses all %variables%
     function prepareResponse(rawOut, messageData) {
         var username = messageData.author.name;
 
         var out;
 
+        //if it's a string just move on, pick a random str from arr otherwise
         if(typeof someVar === 'string') {
             out = rawOut;
         } else {
@@ -19,13 +27,16 @@ module.exports = function(cake) {
         return out.replace("%username%", username);
     }
 
+    //picks a random response from array
     function pickResponse(arr) {
         return arr[Math.floor(Math.random() * arr.length)];
     }
 
+    //if it is in an array
     function inArray(needle, haystck) {
         var array = [];
 
+        //prepare our array for parse friendly strings
         haystck.forEach(function(element){
             array.push(element.toLowerCase());
         });
@@ -33,27 +44,41 @@ module.exports = function(cake) {
         return array.indexOf(needle) > -1;
     }
 
+    //register static responses
+    function registerStaticResponse(inp, outp) {
+        statics.push({
+            "input": inp,
+            "output": outp
+        });
+    }
+
+    //sends a response if it matches a static response
+    function tryStatic(parsable, message) {
+        statics.forEach(function(element){
+            if(inArray(parsable, element.input)) {
+                cake.sendMessage(message.author,
+                    prepareResponse(element.output, message));
+            }
+        });
+    }
+
+    /* Register statics */
+
+    //greetings
+    registerStaticResponse(staticdata.greetings.normal, staticdata.greetings.normalresponses);
+    registerStaticResponse(staticdata.greetings.howareyou, staticdata.greetings.howareyouresponses);
+
+    //generic questions
+    registerStaticResponse(staticdata.questions.help, staticdata.questions.helpresponses);
+
+    /* Event */
     cake.on("message", function(message){
         var parsable = cleanString(message.content);
 
         //do not respond in channels
         if(!message.channel.isPrivate) return;
 
-        //greetings
-        if(inArray(parsable, staticdata.greetings.normal)) {
-            cake.sendMessage(message.author,
-                prepareResponse(staticdata.greetings.normalresponses, message));
-        }
-
-        if(inArray(parsable, staticdata.greetings.howareyou)) {
-            cake.sendMessage(message.author,
-                prepareResponse(staticdata.greetings.howareyouresponses, message));
-        }
-
-        if(inArray(parsable, staticdata.questions.help)) {
-            cake.sendMessage(message.author,
-                prepareResponse(staticdata.questions.helpresponses, message));
-        }
+        tryStatic(parsable, message);
     });
 
     return {};
