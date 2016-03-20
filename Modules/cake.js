@@ -62,5 +62,6 @@ module.exports = function(cake) {
 
     });
 
+    console.log("[MODULE][CAKE-CORE] Initialized!");
     return {};
 };

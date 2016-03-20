@@ -11,7 +11,7 @@ module.exports = function(cake) {
         return inp.toLowerCase().replace(/[^a-zA-Z ]/g, "");
     }
 
-    //parses all %variables%
+    //parses all globally used %variables%
     function prepareResponse(rawOut, messageData) {
         var username = messageData.author.name;
 
@@ -61,6 +61,11 @@ module.exports = function(cake) {
             }
         });
     }
+
+    /*function getVariables(pattern, input){
+        var re = new RegExp(pattern.replace(/%var%/g, '([a-z0-9]+)'));
+        var matches = re.exec(input).slice(1);
+    }*/
 
     /* Register statics */
 

@@ -13,7 +13,7 @@ module.exports = function(cake) {
     try {
         dataobj = jsonfile.readFileSync(datafile);
     } catch(err) {
-        console.log(err.stack);
+        console.log("[MODULE][TWITCH][ERROR]" + err.stack);
     }
 
     function testLive() {
@@ -26,10 +26,10 @@ module.exports = function(cake) {
                 processBody(body);
             } else {
                 if(error) {
-                    console.log(error.stack);
+                    console.log("[MODULE][TWITCH][ERROR]" + error.stack);
                     return;
                 }
-                console.log("STATUS: " +  response.statusCode);
+                console.log("[MODULE][TWITCH][ERROR] HTTP code: " +  response.statusCode);
             }
         });
     }
@@ -53,11 +53,12 @@ module.exports = function(cake) {
             cake.sendMessage(chan, "Sinq is now live: https://www.twitch.tv/sinqnew ! \nPlaying: " +
                                     body.stream.game + "\nTitle: " + body.stream.channel.status);
         } catch(err) {
-            console.log(err.stack);
+            console.log("[MODULE][TWITCH][ERROR]" + err.stack);
         }
     }
 
     setInterval(testLive, 20000);
 
+    console.log("[MODULE][TWITCH] Initialized!");
     return {};
 };
