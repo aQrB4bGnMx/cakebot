@@ -10,7 +10,17 @@
         "helpresponses": ["Well, that's what I am made for", "I can try, at least...", "Cakebot to the rescue!", "What can I help you with, %username%", "Sure, what can I help you with?"],
         "eastereggs": {
             "fox": ["what the fox say", "what does the fox say", "what does a fox say"],
-            "foxres": ["Wa-pa-pa-pa-pa-pa-pow!", "Hatee-hatee-hatee-ho!", "Joff-tchoff-tchoffo-tchoffo-tchoff", "Jacha-chacha-chacha-chow!", "A-hee-ahee ha-hee!"]
+            "foxres": ["Wa-pa-pa-pa-pa-pa-pow!", "Hatee-hatee-hatee-ho!", "Joff-tchoff-tchoffo-tchoffo-tchoff", "Jacha-chacha-chacha-chow!", "A-hee-ahee ha-hee!"],
+            "dogsout": ["who let the dogs out"],
+            "dogsoutres": ["Who? Who? Who? Who? Who?", "I'm not sure whether I have to bark or yell Who? Hey, Yippie, Yi, Yo."],
+            "wearing": ["what are you wearing", "what do you wear"],
+            "wearingres": ["An Intel(R) Xeon(R) CPU E5-2630L v2 @ 2.40GHz, together with 2048MB of dedicated ram. Matches pretty well, doesn't it?"],
+            "talkdirty": ["talk dirty to me", "talk dirty", "talk dirty with me"],
+            "talkdirtyres": ["Hey, girl, do you wanna see my source code?", "Dirt. Gravel. Humus. Compost."]
         }
+    },
+    "statements": {
+        "negativity": ["you suck", "you make me mad", "u suck"],
+        "negativityres": ["You know what they say, don't shoot the messenger.", "A wise man once said, don't shoot the manager", "Noted. Any other complaints?"]
     }
 }

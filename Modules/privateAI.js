@@ -71,8 +71,14 @@ module.exports = function(cake) {
     //generic questions
     registerStaticResponse(staticdata.questions.help, staticdata.questions.helpresponses);
 
+    //generic statements
+    registerStaticResponse(staticdata.statements.negativity, staticdata.statements.negativityres);
+
     //easter eggs
     registerStaticResponse(staticdata.questions.eastereggs.fox, staticdata.questions.eastereggs.foxres);
+    registerStaticResponse(staticdata.questions.eastereggs.dogsout, staticdata.questions.eastereggs.dogsoutres);
+    registerStaticResponse(staticdata.questions.eastereggs.wearing, staticdata.questions.eastereggs.wearingres);
+    registerStaticResponse(staticdata.questions.eastereggs.talkdirty, staticdata.questions.eastereggs.talkdirtyres);
 
     /* Event */
     cake.on("message", function(message){
