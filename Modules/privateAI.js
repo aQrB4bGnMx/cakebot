@@ -45,10 +45,10 @@ module.exports = function(cake) {
     }
 
     //register static responses
-    function registerStaticResponse(inp, outp) {
+    function registerStaticResponse(obj) {
         statics.push({
-            "input": inp,
-            "output": outp
+            "input": obj.read,
+            "output": obj.res
         });
     }
 
@@ -65,20 +65,20 @@ module.exports = function(cake) {
     /* Register statics */
 
     //greetings
-    registerStaticResponse(staticdata.greetings.normal, staticdata.greetings.normalresponses);
-    registerStaticResponse(staticdata.greetings.howareyou, staticdata.greetings.howareyouresponses);
+    registerStaticResponse(staticdata.greetings.normal);
+    registerStaticResponse(staticdata.greetings.howareyou);
 
     //generic questions
-    registerStaticResponse(staticdata.questions.help, staticdata.questions.helpresponses);
+    registerStaticResponse(staticdata.questions.help);
 
     //generic statements
-    registerStaticResponse(staticdata.statements.negativity, staticdata.statements.negativityres);
+    registerStaticResponse(staticdata.statements.negativity);
 
     //easter eggs
-    registerStaticResponse(staticdata.questions.eastereggs.fox, staticdata.questions.eastereggs.foxres);
-    registerStaticResponse(staticdata.questions.eastereggs.dogsout, staticdata.questions.eastereggs.dogsoutres);
-    registerStaticResponse(staticdata.questions.eastereggs.wearing, staticdata.questions.eastereggs.wearingres);
-    registerStaticResponse(staticdata.questions.eastereggs.talkdirty, staticdata.questions.eastereggs.talkdirtyres);
+    registerStaticResponse(staticdata.questions.eastereggs.fox);
+    registerStaticResponse(staticdata.questions.eastereggs.dogs);
+    registerStaticResponse(staticdata.questions.eastereggs.wearing);
+    registerStaticResponse(staticdata.questions.eastereggs.dirty);
 
     /* Event */
     cake.on("message", function(message){
