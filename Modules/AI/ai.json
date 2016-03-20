@@ -7,6 +7,10 @@
     },
     "questions": {
         "help": ["help", "can you help me", "can you help", "help us"],
-        "helpresponses": ["Well, that's what I am made for", "I can try, at least...", "Cakebot to the rescue!", "What can I help you with, %username%", "Sure, what can I help you with?"]
+        "helpresponses": ["Well, that's what I am made for", "I can try, at least...", "Cakebot to the rescue!", "What can I help you with, %username%", "Sure, what can I help you with?"],
+        "eastereggs": {
+            "fox": ["what the fox say", "what does the fox say", "what does a fox say"],
+            "foxres": ["Wa-pa-pa-pa-pa-pa-pow!", "Hatee-hatee-hatee-ho!", "Joff-tchoff-tchoffo-tchoffo-tchoff", "Jacha-chacha-chacha-chow!", "A-hee-ahee ha-hee!"]
+        }
     }
 }

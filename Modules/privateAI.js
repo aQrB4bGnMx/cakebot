@@ -56,7 +56,7 @@ module.exports = function(cake) {
     function tryStatic(parsable, message) {
         statics.forEach(function(element){
             if(inArray(parsable, element.input)) {
-                cake.sendMessage(message.author,
+                cake.sendMessage(message.channel,
                     prepareResponse(element.output, message));
             }
         });
@@ -71,12 +71,25 @@ module.exports = function(cake) {
     //generic questions
     registerStaticResponse(staticdata.questions.help, staticdata.questions.helpresponses);
 
+    //easter eggs
+    registerStaticResponse(staticdata.questions.eastereggs.fox, staticdata.questions.eastereggs.foxres);
+
     /* Event */
     cake.on("message", function(message){
         var parsable = cleanString(message.content);
 
         //do not respond in channels
-        if(!message.channel.isPrivate) return;
+        if(!message.channel.isPrivate) {
+            if(!parsable.startsWith("hey cakebot")) {
+                return;
+            } else {
+                if(parsable == "hey cakebot") {
+                    parsable = "hey";
+                } else {
+                    parsable = parsable.replace("hey cakebot ", "");
+                }
+            }
+        }
 
         tryStatic(parsable, message);
     });
