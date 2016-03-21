@@ -1,9 +1,13 @@
-var staticdata = require("./AI/ai.json");
+var datafile = require("./AI/ai.json");
+
+var generic = require("./AI/adapters/general.js");
 
 module.exports = function(cake) {
 
     /* statics variable */
     var statics = [];
+    /* dynamic inputs */
+    var dynamics = [];
 
     /* Helper functions */
     function cleanString(inp) {
@@ -18,7 +22,7 @@ module.exports = function(cake) {
         var out;
 
         //if it's a string just move on, pick a random str from arr otherwise
-        if(typeof someVar === 'string') {
+        if(typeof rawOut === 'string') {
             out = rawOut;
         } else {
             out = pickResponse(rawOut);
@@ -48,7 +52,7 @@ module.exports = function(cake) {
     function registerStaticResponse(obj) {
         statics.push({
             "input": obj.read,
-            "output": obj.res
+            "output": obj.res,
         });
     }
 
@@ -62,28 +66,75 @@ module.exports = function(cake) {
         });
     }
 
-    /*function getVariables(pattern, input){
-        var re = new RegExp(pattern.replace(/%var%/g, '([a-z0-9]+)'));
-        var matches = re.exec(input).slice(1);
-    }*/
+    //registers a dynamic input
+    function registerDynamicListener(obj, callback){
+        var re;
+
+        if(typeof obj.read === 'string') {
+            re = new RegExp(obj.read.replace(/%var%/g, '([a-z0-9\\s]+)'));
+        } else {
+            re = [];
+            obj.read.forEach(function(element) {
+                re.push(new RegExp(element.replace(/%var%/g, '([a-z0-9\\s]+)')));
+            });
+        }
+
+        dynamics.push({
+            "input": re,
+            "output": obj.res,
+            "callback": callback
+        });
+    }
+
+    //finds a match with dynamic inputs
+    function tryDynamic(parsable, message) {
+        dynamics.forEach(function(element) {
+            try {
+
+                if(typeof element.input === 'string') {
+
+                    if(element.input.test(parsable))
+                        element.callback(element, getVariables(element.input, parsable), message, cake);
+
+                } else {
+                    element.input.forEach(function(el) {
+                        if(el.test(parsable)) element.callback(element, getVariables(el, parsable), message, cake);
+                    });
+                }
+
+            } catch(err) {
+                console.log("[MODULES][AI][ERROR] " + err.stack);
+            }
+        });
+    }
+
+    //gets the variables from our regex pattern
+    function getVariables(repattern, input){
+        return repattern.exec(input).slice(1);
+    }
 
     /* Register statics */
 
     //greetings
-    registerStaticResponse(staticdata.greetings.normal);
-    registerStaticResponse(staticdata.greetings.howareyou);
+    registerStaticResponse(datafile.greetings.normal);
+    registerStaticResponse(datafile.greetings.howareyou);
 
     //generic questions
-    registerStaticResponse(staticdata.questions.help);
+    registerStaticResponse(datafile.questions.help);
 
     //generic statements
-    registerStaticResponse(staticdata.statements.negativity);
+    registerStaticResponse(datafile.statements.negativity);
 
     //easter eggs
-    registerStaticResponse(staticdata.questions.eastereggs.fox);
-    registerStaticResponse(staticdata.questions.eastereggs.dogs);
-    registerStaticResponse(staticdata.questions.eastereggs.wearing);
-    registerStaticResponse(staticdata.questions.eastereggs.dirty);
+    registerStaticResponse(datafile.questions.eastereggs.fox);
+    registerStaticResponse(datafile.questions.eastereggs.dogs);
+    registerStaticResponse(datafile.questions.eastereggs.wearing);
+    registerStaticResponse(datafile.questions.eastereggs.dirty);
+
+    /* Register dynamics */
+
+    //generic questions
+    registerDynamicListener(datafile.questions.opinion, generic.staticResponse);
 
     /* Event */
     cake.on("message", function(message){
@@ -102,7 +153,12 @@ module.exports = function(cake) {
             }
         }
 
-        tryStatic(parsable, message);
+        try {
+            tryStatic(parsable, message);
+            tryDynamic(parsable, message);
+        } catch(err) {
+            console.log("[MODULES][AI][ERROR] " + err.stack);
+        }
     });
 
     return {};
