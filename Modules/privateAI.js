@@ -130,11 +130,13 @@ module.exports = function(cake) {
     registerStaticResponse(datafile.questions.eastereggs.dogs);
     registerStaticResponse(datafile.questions.eastereggs.wearing);
     registerStaticResponse(datafile.questions.eastereggs.dirty);
+    registerStaticResponse(datafile.questions.eastereggs.meaninglife);
 
     /* Register dynamics */
 
     //generic questions
     registerDynamicListener(datafile.questions.opinion, generic.staticResponse);
+    registerDynamicListener(datafile.questions.whybecause, generic.staticResponse);
 
     /* Event */
     cake.on("message", function(message){

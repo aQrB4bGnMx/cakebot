@@ -30,11 +30,19 @@
             "dirty": {
                 "read": ["talk dirty to me", "talk dirty", "talk dirty with me"],
                 "res": ["Hey, girl, do you wanna see my source code?", "Dirt. Gravel. Humus. Compost."]
+            },
+            "meaninglife": {
+                "read": ["whats the meaning of life", "what is the meaning of life"],
+                "res": ["42."]
             }
         },
         "opinion": {
             "read": ["what do you think about %var%", "what is your opinion on %var%", "whats your opinion on %var%", "how do you feel about %var%"],
             "res": ["People told me not to have opinions, because you'll get killed in this world if you do.", "If I had an opinion, there is a relatively high chance you would be offended, so sorry, I don't know."]
+        },
+        "whybecause": {
+            "read": ["why are %var%", "why is %var%"],
+            "res": ["Because."]
         }
     },
     "statements": {
