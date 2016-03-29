@@ -1,10 +1,16 @@
 global.config = require('./config.json');
 var Discord = require("discord.js");
-global.version = "v0.3.12";
+global.version = "v0.4.0";
 
 var cake = new Discord.Client();
 
-cake.login(config.email, config.pass, function(error, token) {
+if(config.bot.isbot) {
+    cake.loginWithToken("Bot " + config.bot.bottoken, authCallback);
+} else {
+    cake.login(config.email, config.pass, authCallback);
+}
+
+function authCallback(error, token){
     if(error) {
         console.log("[AUTH] Failed");
         console.log(error.stack);
@@ -13,7 +19,7 @@ cake.login(config.email, config.pass, function(error, token) {
 
     console.log("[AUTH] Logged in!");
     console.log("[AUTH] Token: " + token);
-});
+}
 
 cake.on("ready", function(){
     require("./Modules/privateAI")(cake);

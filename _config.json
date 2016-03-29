@@ -2,8 +2,8 @@
     "readme": "rename to config.json",
     "email": "cakebot@example.com",
     "pass": "ExAmPlE",
-    "voip": {
-        "enabled": true,
-        "server": 158962769545134081
+    "bot": {
+        "isbot": false,
+        "bottoken": "AAAAAAAAAAAAAAAAA.AAAAAAAAAAAAAAAAAAA_AAAAAH"
     }
 }
