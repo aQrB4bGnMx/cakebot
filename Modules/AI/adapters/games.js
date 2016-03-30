@@ -155,7 +155,7 @@ GameWatcher.prototype.respondPlayedGames = function(obj, variables, raw, cake) {
                 case "portal 2":
                     res += "(Probably a lie..)";
                     break;
-                case "portal 1":
+                case "portal":
                     res += "(I am so delicious and moist)";
                     break;
                 case "half life 3":
