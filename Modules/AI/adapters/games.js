@@ -94,10 +94,12 @@ function GameWatcher(bot) {
 GameWatcher.prototype.save = function(game, user, diff){
     if(this.data[user] === undefined) this.data[user] = {};
 
-    if(this.data[user][game] === undefined) {
-        this.data[user][game] = diff;
-    } else if(this.data[user][game] > 0) {
-        this.data[user][game] += diff;
+    var escapedGame = game.replace(new RegExp("\n", "g"), " ");
+
+    if(this.data[user][escapedGame] === undefined) {
+        this.data[user][escapedGame] = diff;
+    } else if(this.data[user][escapedGame] > 0) {
+        this.data[user][escapedGame] += diff;
     }
 };
 
