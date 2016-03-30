@@ -67,7 +67,7 @@ module.exports = function(cake) {
     }
 
     //registers a dynamic input
-    function registerDynamicListener(obj, callback){
+    function registerDynamicListener(obj, callback, scope){
         var re;
 
         if(typeof obj.read === 'string') {
@@ -82,23 +82,23 @@ module.exports = function(cake) {
         dynamics.push({
             "input": re,
             "output": obj.res,
-            "callback": callback
+            "callback": callback,
+            "scope": scope
         });
     }
 
     //finds a match with dynamic inputs
-    function tryDynamic(parsable, message) {
+    function tryDynamic(parsable, message, scope) {
         dynamics.forEach(function(element) {
             try {
-
                 if(typeof element.input === 'string') {
 
                     if(element.input.test(parsable))
-                        element.callback(element, getVariables(element.input, parsable), message, cake);
+                        element.callback.apply(element.scope, [element, getVariables(element.input, parsable), message, cake]);
 
                 } else {
                     element.input.forEach(function(el) {
-                        if(el.test(parsable)) element.callback(element, getVariables(el, parsable), message, cake);
+                        if(el.test(parsable)) element.callback.apply(element.scope, [element, getVariables(el, parsable), message, cake]);
                     });
                 }
 
@@ -112,6 +112,11 @@ module.exports = function(cake) {
     function getVariables(repattern, input){
         return repattern.exec(input).slice(1);
     }
+
+    /* Start constant event readers */
+
+    var GameWatcher = require("./AI/adapters/games");
+    var games = new GameWatcher(cake);
 
     /* Register statics */
 
@@ -135,8 +140,11 @@ module.exports = function(cake) {
     /* Register dynamics */
 
     //generic questions
-    registerDynamicListener(datafile.questions.opinion, generic.staticResponse);
-    registerDynamicListener(datafile.questions.whybecause, generic.staticResponse);
+    registerDynamicListener(datafile.questions.opinion, generic.staticResponse, this);
+    registerDynamicListener(datafile.questions.whybecause, generic.staticResponse, this);
+
+    //actual data questions
+    registerDynamicListener(datafile.questions.info.games, games.respondPlayedGames, games);
 
     /* Event */
     cake.on("message", function(message){

@@ -34,11 +34,9 @@ node_modules
 
 # Cakebot specific
 /config.json
-/modules/soundboard
-# ^ WIP
 
-# Discord.io
+# Discord
 tenc
 
 # Modules
-/modules/twitch/data.json
+data.json

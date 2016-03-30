@@ -43,6 +43,14 @@
         "whybecause": {
             "read": ["why are %var%", "why is %var%"],
             "res": ["Because."]
+        },
+        "info": {
+            "games": {
+                "read": ["what did i play", "what games did i play", "what games have i played", "what games did i play",
+                         "what have i played", "what games have i played", "how long have i played games", "how long have i played",
+                         "how much did i play", "how much have i played"],
+                "res": ["Well, that's messed up. Error. Developers have been alerted."]
+            }
         }
     },
     "statements": {
