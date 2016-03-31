@@ -140,38 +140,39 @@ GameWatcher.prototype.exitProcedure = function() {
 };
 
 GameWatcher.prototype.respondPlayedGames = function(obj, variables, raw, cake) {
-    if(this.data[raw.author.id] === undefined) {
+    if(this.data[raw.author.id] === undefined && raw.author.game === null) {
         cake.sendMessage(raw.channel, "It doesn't look like you play games... What a sad life...");
     } else {
         var res = "";
-        var dataobj = this.data[raw.author.id];
+        var dataobj;
+
+        console.log(this.data[raw.author.id])
+
+        if(this.data[raw.author.id] !== undefined){
+            dataobj = this.data[raw.author.id];
+        } else  {
+            dataobj = {};
+        }
+
+        console.log(dataobj)
 
         res+= "To my knowledge, you played these games:";
         res+= "```";
 
-        for (var game in dataobj) {
-            var readable = aiUtils.secondsToReadable(dataobj[game]);
-            res += game + " - " + readable.h + "h " + readable.m + "m " + readable.s + "s ";
+        //if the game is not in data file nor is finished playing
+        if(raw.author.game !== null && dataobj[escapeTomsGames(raw.author.game.name)] === undefined) {
+            res+= createGameListLine(raw.author.game.name, timediff(this.playdata[raw.author.id]));
+        }
 
-            switch(game.toLowerCase()) {
-                case "portal 2":
-                    res += "(Probably a lie..)";
-                    break;
-                case "portal":
-                    res += "(I am so delicious and moist)";
-                    break;
-                case "half life 3":
-                    res += "(Confirmed?!)";
-                    break;
-                case "space engineers":
-                    res += "(Trust me, I'm an engineer he said)";
-                    break;
-                case "with cakebot":
-                    res += "(Can confirm.)";
-                    break;
+        for (var game in dataobj) {
+            var secs = dataobj[game];
+
+            //if the dude is still playing.
+            if(raw.author.game !== null && escapeTomsGames(raw.author.game.name) == game) {
+                secs += timediff(this.playdata[raw.author.id]);
             }
 
-            res += '\n';
+            res += createGameListLine(game, secs);
         }
 
         res += "```";
@@ -180,6 +181,39 @@ GameWatcher.prototype.respondPlayedGames = function(obj, variables, raw, cake) {
     }
 };
 
+function createGameListLine(game, secs){
+    var out = "";
 
+    var readable = aiUtils.secondsToReadable(secs);
+
+    out += escapeTomsGames(game) + " - " + readable.h + "h " + readable.m + "m " + readable.s + "s ";
+
+    switch(game.toLowerCase()) {
+        case "portal 2":
+            out += "(Probably a lie..)";
+            break;
+        case "portal":
+            out += "(I am so delicious and moist)";
+            break;
+        case "half life 3":
+            out += "(Confirmed?!)";
+            break;
+        case "space engineers":
+            out += "(Trust me, I'm an engineer he said)";
+            break;
+        case "with cakebot":
+            out += "(Can confirm.)";
+            break;
+    }
+
+    out += '\n';
+
+    return out;
+}
+
+function escapeTomsGames(game){
+    var escapedGame = game.replace(new RegExp("\n", "g"), " ");
+    return escapedGame;
+}
 
 module.exports = GameWatcher;

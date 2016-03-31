@@ -5,5 +5,10 @@
     "bot": {
         "isbot": false,
         "bottoken": "AAAAAAAAAAAAAAAAA.AAAAAAAAAAAAAAAAAAA_AAAAAH"
+    },
+    "modules": {
+        "AI": true,
+        "twitch": true,
+        "core": true
     }
 }
