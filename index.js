@@ -1,6 +1,6 @@
 global.config = require('./config.json');
 var Discord = require("discord.js");
-global.version = "v0.4.3";
+global.version = "v0.4.7";
 
 var cake = new Discord.Client();
 

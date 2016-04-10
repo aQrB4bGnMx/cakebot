@@ -56,7 +56,7 @@ module.exports = function(cake) {
         }
     }
 
-    setInterval(testLive, 20000);
+    setInterval(testLive, 60000);
 
     console.log("[MODULE][TWITCH] Initialized!");
     return {};

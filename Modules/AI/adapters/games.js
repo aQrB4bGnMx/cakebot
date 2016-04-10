@@ -146,15 +146,11 @@ GameWatcher.prototype.respondPlayedGames = function(obj, variables, raw, cake) {
         var res = "";
         var dataobj;
 
-        console.log(this.data[raw.author.id])
-
         if(this.data[raw.author.id] !== undefined){
             dataobj = this.data[raw.author.id];
         } else  {
             dataobj = {};
         }
-
-        console.log(dataobj)
 
         res+= "To my knowledge, you played these games:";
         res+= "```";
