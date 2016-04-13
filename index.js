@@ -1,6 +1,6 @@
 global.config = require('./config.json');
 var Discord = require("discord.js");
-global.version = "v1.0.1";
+global.version = "v1.0.2";
 
 var cake = new Discord.Client();
 
@@ -25,6 +25,7 @@ cake.on("ready", function(){
     require("./Modules/privateAI")(cake);
     require("./Modules/twitch")(cake);
     require("./Modules/cake")(cake);
+    require("./Modules/moderation.js")(cake);
 
     cake.setStatus("here", version + " by nickforall");
 });
