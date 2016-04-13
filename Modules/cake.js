@@ -46,18 +46,18 @@ module.exports = function(cake) {
             cake.sendMessage(message.author, out);
         }
 
-        function serializeServerChannels(server) {
-            var chanString = "";
+    });*/
 
-            for (i = 0; i < server.channels.length; i++) {
-                var c = server.channels[i];
-                chanString += c.type + "#" + c.id + " > " + c.name + "\n";
-            }
+    function serializeServerChannels(server) {
+        var chanString = "";
 
-            return chanString;
+        for (i = 0; i < server.channels.length; i++) {
+            var c = server.channels[i];
+            chanString += c.type + "#" + c.id + " > " + c.name + "\n";
         }
 
-    });*/
+        return chanString;
+    }
 
     cake.on("cakecmd", function(name, args, raw) {
         if(name == "kill") {
@@ -66,7 +66,23 @@ module.exports = function(cake) {
             cake.logout(function(){
                     process.exit(0);
             });
+            return;
         }
+
+        if(name == "dev" && args[0] == "channel") {
+            cake.sendMessage(raw.channel, "```" + raw.channel + " "+ raw.channel.name + ": " +
+                             raw.channel.topic + " - #" + raw.channel.position + "```");
+            return;
+        }
+
+        if(name == "dev" && args[0] == "server") {
+            var server = raw.channel.server;
+            var str = serializeServerChannels(server);
+
+            cake.sendMessage(raw.channel, "```" + server.id + ": \n\n" + str + "```");
+            return;
+        }
+
     });
 
     console.log("[MODULE][CAKE-CORE] Initialized!");
