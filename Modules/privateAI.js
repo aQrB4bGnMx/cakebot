@@ -144,7 +144,7 @@ module.exports = function(cake) {
     registerDynamicListener(datafile.questions.whybecause, generic.staticResponse, this);
 
     //actual data questions
-    registerDynamicListener(datafile.questions.info.games, games.respondPlayedGames, games);
+    //registerDynamicListener(datafile.questions.info.games, games.respondPlayedGames, games);
 
     /* Event */
     cake.on("message", function(message){

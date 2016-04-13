@@ -1,3 +1,10 @@
+/*
+ * THIS CODE IS DEPRECATED AND NOT USED IN CAKEBOT ANYMORE!
+ *
+ * CODE SHOULD NOT BE REMOVED, BECAUSE IT MIGHT COME BACK IN NEWER CAKEBOT
+ * VERSIONs.
+ */
+
 var jsonfile = require('jsonfile');
 var path = require("path");
 var aiUtils = require("../AiUtils");
@@ -76,7 +83,7 @@ function GameWatcher(bot) {
     }, 15 * 1000);
 
     //fancy stops when ctrl+c or when someone pushes the big red button
-    process.on('exit', function(code) {
+    /*process.on('exit', function(code) {
         self.exitProcedure();
     });
 
@@ -86,7 +93,7 @@ function GameWatcher(bot) {
 
     process.on('SIGINT', function () {
         self.exitProcedure();
-    });
+    });*/
 
     console.log("[MODULE][GAMES] Initialized!");
 }

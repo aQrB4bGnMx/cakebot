@@ -28,37 +28,3 @@ cake.on("ready", function(){
 
     cake.setStatus("here", version + " by nickforall");
 });
-
-//fancy stops when ctrl+c or when someone pushes the big red button
-//TODO: de-uglify.. worst code ever. Sorry
-process.on('exit', function(code) {
-    if(code == 500) {
-        process.exit(0);
-        return;
-    }
-
-    cake.logout();
-    console.log("Please wait...");
-    console.log("While we ready your cakebot instance for a safe quit...");
-    setTimeout(function () {
-        process.exit(500);
-    }, 2000);
-});
-
-process.on('SIGHUP', function () {
-    cake.logout();
-    console.log("Please wait...");
-    console.log("While we ready your cakebot instance for a safe quit...");
-    setTimeout(function () {
-        process.exit(500);
-    }, 2000);
-});
-
-process.on('SIGINT', function () {
-    cake.logout();
-    console.log("Please wait...");
-    console.log("While we ready your cakebot instance for a safe quit...");
-    setTimeout(function () {
-        process.exit(500);
-    }, 2000);
-});
