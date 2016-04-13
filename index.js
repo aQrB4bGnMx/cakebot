@@ -28,3 +28,30 @@ cake.on("ready", function(){
 
     cake.setStatus("here", version + " by nickforall");
 });
+
+var bot = SinqBot;
+
+cake.on("message", function(message) {
+    console.log(message.content)
+    if(message.content.startsWith("!") || message.content.startsWith("!cake")) {
+        var parsable = message.content.slice(1).toLowerCase();
+        var _cmd = parsable.split(" ");
+
+        var cmdname = _cmd[0];
+        var cmdargs = _cmd.slice(1);
+
+        if(cmdargs === undefined) cmdargs = [];
+
+        bot.emit("generalcmd", cmdname, cmdargs, message);
+    }
+});
+
+cake.on("generalcmd", function(name, args, message){
+    if(name == "bots") {
+        bot.sendMessage(message.channel,
+            "Hello I am cakebot, a machine learning project by Nickforall. " +
+            "I am collecting anonymous data from various discord servers, and" +
+            "besides my AI module that is gonna take over the world I am a " +
+            "moderater too!");
+    }
+});
