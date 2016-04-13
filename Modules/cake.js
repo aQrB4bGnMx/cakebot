@@ -1,10 +1,7 @@
 require("../config.json");
 
 module.exports = function(cake) {
-    cake.on("message", function(message){
-        if(message.content === ":cake info")
-            cake.sendMessage(message.channel, "Hello, my name is Cakebot. \nI am a bot configured to automoderate, provide info, and have some fun. \nFor any issues contact @Nickforall");
-
+    /*cake.on("message", function(message){
         if(message.content === ":cake info channel")
             cake.sendMessage(message.channel, "```" + message.channel + " "+ message.channel.name + ": " +
             message.channel.topic + " - P" + message.channel.position + "```");
@@ -60,6 +57,16 @@ module.exports = function(cake) {
             return chanString;
         }
 
+    });*/
+
+    cake.on("cakecmd", function(name, args, raw) {
+        if(name == "kill") {
+            cake.sendMessage(raw.channel, "You just keep on trying \n'til you run out of cake.\n" +
+                                          "And the science gets done\nFor the people who are still alive.");
+            cake.logout(function(){
+                    process.exit(0);
+            });
+        }
     });
 
     console.log("[MODULE][CAKE-CORE] Initialized!");

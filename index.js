@@ -1,6 +1,6 @@
 global.config = require('./config.json');
 var Discord = require("discord.js");
-global.version = "v0.4.7";
+global.version = "v1.0.0";
 
 var cake = new Discord.Client();
 
@@ -29,11 +29,18 @@ cake.on("ready", function(){
     cake.setStatus("here", version + " by nickforall");
 });
 
-var bot = SinqBot;
-
 cake.on("message", function(message) {
-    console.log(message.content)
-    if(message.content.startsWith("!") || message.content.startsWith("!cake")) {
+    if(message.content.startsWith("!cake")) {
+        var cakeparsable = message.content.slice(5).toLowerCase();
+        var _cakecmd = cakeparsable.split(" ");
+
+        var cakecmdname = _cakecmd[1];
+        var cakecmdargs = _cakecmd.slice(2);
+
+        if(cakecmdargs === undefined) cakecmdargs = [];
+
+        cake.emit("cakecmd", cakecmdname, cakecmdargs, message);
+    } else  if(message.content.startsWith("!")) {
         var parsable = message.content.slice(1).toLowerCase();
         var _cmd = parsable.split(" ");
 
@@ -42,15 +49,16 @@ cake.on("message", function(message) {
 
         if(cmdargs === undefined) cmdargs = [];
 
-        bot.emit("generalcmd", cmdname, cmdargs, message);
-    }
+        cake.emit("generalcmd", cmdname, cmdargs, message);
+        }
 });
 
 cake.on("generalcmd", function(name, args, message){
     if(name == "bots") {
-        bot.sendMessage(message.channel,
+        cake.sendMessage(message.channel,
             "Hello I am cakebot, a machine learning project by Nickforall. " +
-            "I am collecting anonymous data from various discord servers, and" +
+            "I am collecting anonymous data from various discord servers. " +
+            "Don't worry, only in the servers where I got permission! and " +
             "besides my AI module that is gonna take over the world I am a " +
             "moderater too!");
     }
