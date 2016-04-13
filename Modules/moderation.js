@@ -15,7 +15,7 @@ module.exports = function(cake) {
     cake.on("messageUpdated", function(msg1, msg2){
         if(isWatching(msg1)) {
             cake.sendMessage(logchans[msg1.channel.server.id], "On " + new Date().toString() +
-                msg1.author.name + " edited `" + msg1.content + "` to `" + msg2.content + "`.");
+                msg1.author.name + " edited ```" + msg1.content + "``` to ```" + msg2.content + "```.");
         }
     });
 };
