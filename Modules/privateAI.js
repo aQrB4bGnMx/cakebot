@@ -115,8 +115,8 @@ module.exports = function(cake) {
 
     /* Start constant event readers */
 
-    var GameWatcher = require("./AI/adapters/games");
-    var games = new GameWatcher(cake);
+    //var GameWatcher = require("./AI/adapters/games");
+    //var games = new GameWatcher(cake);
 
     /* Register statics */
 
